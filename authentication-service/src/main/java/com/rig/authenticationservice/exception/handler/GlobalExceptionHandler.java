@@ -1,6 +1,7 @@
-package com.rig.authenticationservice.exception;
+package com.rig.authenticationservice.exception.handler;
 
 import com.rig.authenticationservice.data.payload.response.ExceptionResponse;
+import com.rig.authenticationservice.exception.LoginException;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import lombok.AllArgsConstructor;

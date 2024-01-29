@@ -1,1 +1,21 @@
+app:
+  client:
+    authentication-service:
+      name: authentication-service-client
+      url: http://localhost:8085
+  security:
+    allowedOrigins: http://localhost
+    api-key:
+      header: x-api-key
+      value: 989fe8e4-1066-44be-9fd4-0b7ecfeecef6
 
+resilience4j.ratelimiter:
+  instances:
+    authentication-service-rate-limiter:
+      limitForPeriod: 100
+      limitRefreshPeriod: 1s
+      timeoutDuration: 5s
+
+server:
+  port: 8080
+  shutdown: graceful
