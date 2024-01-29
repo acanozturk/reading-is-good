@@ -1,0 +1,46 @@
+CREATE TABLE account
+(
+    id SERIAL PRIMARY KEY,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    phone VARCHAR(20) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    status VARCHAR(10) NOT NULL CHECK (status IN ('ACTIVE', 'INACTIVE')),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_by VARCHAR(255) NOT NULL,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_by VARCHAR(255) NOT NULL,
+    version INTEGER NOT NULL DEFAULT 0
+);
+
+CREATE TABLE customer
+(
+	id SERIAL PRIMARY KEY,    
+	account_id INTEGER REFERENCES account(id) NOT NULL UNIQUE,
+    gender VARCHAR(10) NOT NULL CHECK (gender IN ('FEMALE', 'MALE', 'OTHER')),
+    first_name VARCHAR(100) NOT NULL,
+    last_name VARCHAR(100) NOT NULL,
+    date_of_birth DATE NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_by VARCHAR(255) NOT NULL,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_by VARCHAR(255) NOT NULL,
+    version INTEGER NOT NULL DEFAULT 0
+);
+
+CREATE TABLE customer_address
+(
+    id SERIAL PRIMARY KEY,
+    customer_id INTEGER REFERENCES customer(id) NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    country VARCHAR(100) NOT NULL,
+    city VARCHAR(100) NOT NULL,
+    district VARCHAR(100) NOT NULL,
+    street VARCHAR(100) NOT NULL,
+    house_number VARCHAR(100) NOT NULL,
+    description TEXT DEFAULT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_by VARCHAR(255) NOT NULL,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_by VARCHAR(255) NOT NULL,
+    version INTEGER NOT NULL DEFAULT 0
+);
