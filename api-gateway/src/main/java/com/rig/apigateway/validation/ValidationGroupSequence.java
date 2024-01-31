@@ -1,15 +1,16 @@
 package com.rig.apigateway.validation;
 
-import com.rig.apigateway.validation.group.BlankValidationGroup;
-import com.rig.apigateway.validation.group.FormatValidationGroup;
-import com.rig.apigateway.validation.group.PayloadValidationGroup;
+import com.rig.apigateway.validation.group.*;
 import jakarta.validation.GroupSequence;
 
 @GroupSequence(
         {
                 BlankValidationGroup.class,
+                NullValidationGroup.class,
+                ValueValidationGroup.class,
                 FormatValidationGroup.class,
-                PayloadValidationGroup.class,
+                SizeValidationGroup.class,
+                PayloadValidationGroup.class
         }
 )
 public interface ValidationGroupSequence {

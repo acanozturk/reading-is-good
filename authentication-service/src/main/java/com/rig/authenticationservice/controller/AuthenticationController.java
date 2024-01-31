@@ -25,7 +25,7 @@ public final class AuthenticationController {
 
     @PostMapping("/login")
     @Operation(summary = "Returns a JWT to be used in further authentications.")
-    public JwtResponse login(@Valid @RequestBody LoginRequest loginRequest) {
+    public JwtResponse login(@Valid @RequestBody final LoginRequest loginRequest) {
         return authenticationService.login(loginRequest);
     }
     

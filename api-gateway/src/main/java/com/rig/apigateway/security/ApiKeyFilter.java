@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Locale;
 
-import static com.rig.apigateway.config.WebSecurityConfig.PUBLIC_WHITELIST;
+import static com.rig.apigateway.config.WebSecurityConfig.API_KEY_PUBLIC_WHITELIST;
 
 @Component
 @RequiredArgsConstructor
@@ -41,7 +41,7 @@ public class ApiKeyFilter extends OncePerRequestFilter {
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
-        return Arrays.stream(PUBLIC_WHITELIST).anyMatch(url -> request.getRequestURI().startsWith(url));
+        return Arrays.stream(API_KEY_PUBLIC_WHITELIST).anyMatch(url -> request.getRequestURI().startsWith(url));
     }
     
 }

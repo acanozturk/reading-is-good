@@ -2,6 +2,7 @@ package com.rig.authenticationservice.security.userdetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -14,6 +15,9 @@ public final class UserDetailsImpl implements UserDetails {
 
     @JsonIgnore
     private String password;
+    
+    @Getter
+    private Long accountId;
     
     private Collection<? extends GrantedAuthority> authorities;
 

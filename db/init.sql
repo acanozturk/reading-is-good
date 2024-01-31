@@ -31,13 +31,50 @@ CREATE TABLE customer_address
 (
     id SERIAL PRIMARY KEY,
     customer_id INTEGER REFERENCES customer(id) NOT NULL,
-    name VARCHAR(100) NOT NULL,
+    title VARCHAR(100) NOT NULL,
     country VARCHAR(100) NOT NULL,
     city VARCHAR(100) NOT NULL,
     district VARCHAR(100) NOT NULL,
     street VARCHAR(100) NOT NULL,
-    house_number VARCHAR(100) NOT NULL,
+    house_number VARCHAR(20) NOT NULL,
+    post_code VARCHAR(20) NOT NULL,
     description TEXT DEFAULT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_by VARCHAR(255) NOT NULL,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_by VARCHAR(255) NOT NULL,
+    version INTEGER NOT NULL DEFAULT 0
+);
+
+CREATE TABLE book
+(
+	id SERIAL PRIMARY KEY,    
+    title VARCHAR(100) NOT NULL,
+    genre VARCHAR(50) NOT NULL,
+    author VARCHAR(100) NOT NULL,
+    publish_date DATE NOT NULL,
+    pages INTEGER NOT NULL,
+    price DECIMAL(8,2) NOT NULL CHECK (price > 0.00),
+	total_quantity INTEGER NOT NULL CHECK (total_quantity >= 0),
+    sold_quantity INTEGER NOT NULL CHECK (sold_quantity >= 0),
+    available_quantity INTEGER NOT NULL CHECK (available_quantity >= 0),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_by VARCHAR(255) NOT NULL,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_by VARCHAR(255) NOT NULL,
+    version INTEGER NOT NULL DEFAULT 0
+);
+
+CREATE TABLE orders
+(
+	id SERIAL PRIMARY KEY, 
+	order_code UUID NOT NULL UNIQUE,
+	customer_id INTEGER REFERENCES customer(id) NOT NULL,
+    book_id INTEGER REFERENCES book(id) NOT NULL,
+    delivery_address_id INTEGER REFERENCES customer_address(id) NOT NULL,
+    order_quantity INTEGER NOT NULL CHECK (order_quantity > 0),
+    order_price DECIMAL(8,2) NOT NULL CHECK (order_price > 0.00),
+    status VARCHAR(15) NOT NULL CHECK (status IN ('IN_PROGRESS', 'PACKAGED', 'TRANSPORTING', 'IN_DELIVERY', 'DELIVERED', 'CANCELLED')),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     created_by VARCHAR(255) NOT NULL,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

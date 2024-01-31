@@ -1,0 +1,24 @@
+app:
+  cache:
+    order:
+      ttl-ms: 1800000
+    order-list:
+      ttl-ms: 300000
+  security:
+    allowedOrigins: http://localhost:8080
+
+server:
+  port: 8100
+  shutdown: graceful
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/rig_db
+    username: admin
+    password: admin
+  jpa:
+    open-in-view: false
+  kafka:
+    bootstrap-servers: localhost:9092
+

@@ -1,0 +1,11 @@
+server:
+  port: 8110
+  shutdown: graceful
+
+spring:
+  data:
+    mongodb:
+      auto-index-creation: true
+      uri: mongodb://admin:admin@localhost:27017/rig_history_db?authSource=admin
+  kafka:
+    bootstrap-servers: localhost:9092

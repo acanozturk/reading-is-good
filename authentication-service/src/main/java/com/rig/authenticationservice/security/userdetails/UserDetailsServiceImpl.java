@@ -27,6 +27,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         return UserDetailsImpl.builder()
                 .withUsername(account.getEmail())
                 .withPassword(account.getPassword())
+                .withAccountId(account.getId())
                 .withAuthorities(new ArrayList<>())
                 .build();
     }

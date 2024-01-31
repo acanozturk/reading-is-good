@@ -1,9 +1,6 @@
 package com.rig.apigateway.exception.handler;
 
-import com.rig.apigateway.exception.ClientBadRequestException;
-import com.rig.apigateway.exception.ClientInternalServerErrorException;
-import com.rig.apigateway.exception.ClientUnauthorizedException;
-import com.rig.apigateway.exception.ExceptionResponse;
+import com.rig.apigateway.exception.*;
 import io.github.resilience4j.ratelimiter.RequestNotPermitted;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
@@ -59,6 +56,15 @@ public final class GlobalExceptionHandler {
     public ExceptionResponse handle(final ConstraintViolationException exception) {
         log.error("{} occurred: ", exception.getClass().getSimpleName(), exception);
         return new ExceptionResponse(extractMessage(exception));
+    }
+
+    @ExceptionHandler(LoginException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public ExceptionResponse handle(final LoginException exception) {
+        log.error("{} occurred: {}", exception.getClass().getSimpleName(), exception.getMessage());
+        return new ExceptionResponse(
+                messageSource.getMessage("exception.login", null, Locale.getDefault())
+        );
     }
 
     @ExceptionHandler(RequestNotPermitted.class)

@@ -1,0 +1,25 @@
+app:
+  security:
+    allowedOrigins: http://localhost:8080
+
+server:
+  port: 8090
+  shutdown: graceful
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/rig_db
+    username: admin
+    password: admin
+  jpa:
+    open-in-view: false
+    properties:
+      org:
+        hibernate:
+          envers:
+            audit_table_suffix: _HISTORY
+    hibernate:
+      ddl-auto: update
+  kafka:
+    bootstrap-servers: localhost:9092

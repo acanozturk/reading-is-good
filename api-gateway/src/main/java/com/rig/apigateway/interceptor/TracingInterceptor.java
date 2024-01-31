@@ -1,6 +1,6 @@
 package com.rig.apigateway.interceptor;
 
-import com.rig.apigateway.data.constant.TracingConstant;
+import com.rig.apigateway.util.TracingConstant;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.MDC;

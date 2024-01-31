@@ -1,5 +1,6 @@
 package com.rig.apigateway.config;
 
+import com.rig.apigateway.security.JwtFilter;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,16 +9,26 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 @AllArgsConstructor
 public class WebSecurityConfig {
 
-    public static final String[] PUBLIC_WHITELIST = new String[]{
+    private final JwtFilter jwtFilter;
+    
+    public static final String[] API_KEY_PUBLIC_WHITELIST = new String[]{
             "/swagger-ui",
             "/v3/api-docs",
-            "/actuator/health"
+            "/actuator/health",
+    };
+    
+    public static final String[] JWT_PUBLIC_WHITELIST = new String[]{
+            "/swagger-ui",
+            "/v3/api-docs",
+            "/actuator/health",
+            "/api/v1/auth/login"
     };
     
     @Bean
@@ -38,6 +49,7 @@ public class WebSecurityConfig {
                                 ).permitAll()
                                 .anyRequest().authenticated()
                 )
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
 

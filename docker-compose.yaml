@@ -4,6 +4,7 @@ services:
   
   postgres:
     image: postgres:16-alpine
+    container_name: rig-postgres
     ports:
       - "5432:5432"
     environment:
@@ -11,9 +12,66 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
-      - postgres-data:/var/lib/postgresql
+      - postgres-data:/var/lib/postgresql/data
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
     restart: always
+
+  mongo:
+      image: mongo
+      container_name: rig-mongo
+      ports:
+        - '27017:27017'
+      volumes:
+        - mongo-data:/data/db
+      environment:
+        MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+        MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_USERNAME}
+      healthcheck:
+        test: echo 'db.runCommand({serverStatus:1}).ok' | mongosh admin -u $MONGO_INITDB_ROOT_USERNAME -p $MONGO_INITDB_ROOT_PASSWORD --quiet | grep 1
+        interval: 10s
+        timeout: 10s
+        retries: 3
+        start_period: 20s
+      restart: on-failure
+      
+  zookeeper:
+    image: bitnami/zookeeper
+    container_name: rig-zookeeper
+    ports:
+      - "2181:2181"
+    volumes:
+      - zk-data:/bitnami
+    environment:
+      ALLOW_ANONYMOUS_LOGIN: yes
+
+  kafka:
+    image: bitnami/kafka
+    container_name: rig-kafka
+    ports:
+      - "9092:9092"
+    volumes:
+      - kafka-data:/bitnami
+    environment:
+      ALLOW_PLAINTEXT_LISTENER: yes
+      KAFKA_CFG_BROKER_ID: 1
+      KAFKA_CFG_LISTENERS: PLAINTEXT://:9092
+      KAFKA_CFG_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_CFG_ZOOKEEPER_CONNECT: zookeeper:2181
+    depends_on:
+      zookeeper:
+        condition: service_started
+    healthcheck:
+      test: [ "CMD-SHELL", "kafka-topics.sh --bootstrap-server kafka:9092 --topic book-history --replication-factor 1 --partitions 1 --create --if-not-exists 
+                && kafka-topics.sh --bootstrap-server kafka:9092 --topic customer-history --replication-factor 1 --partitions 1 --create --if-not-exists 
+                && kafka-topics.sh --bootstrap-server kafka:9092 --topic order-history --replication-factor 1 --partitions 1 --create --if-not-exists 
+                && kafka-topics.sh --bootstrap-server kafka:9092 --topic book-history --describe" ]
+      interval: 2s
+      timeout: 2s
+      retries: 5
+    restart: on-failure
     
 volumes:
   postgres-data:
+  mongo-data:
+  zk-data:
+  kafka-data:

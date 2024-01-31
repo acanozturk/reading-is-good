@@ -38,27 +38,4 @@ public final class JwtManager {
                 .compact();
     }
 
-    public String extractUsername(final String jwt) {
-        return Jwts.parser()
-                .verifyWith(Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8)))
-                .build()
-                .parseSignedClaims(jwt)
-                .getPayload()
-                .getSubject();
-    }
-
-    public boolean isValidJwt(final String jwt) {
-        try {
-            Jwts.parser()
-                    .verifyWith(Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8)))
-                    .build()
-                    .parseSignedClaims(jwt);
-
-            return true;
-        } catch (Exception e) {
-            log.error("Invalid JWT token received");
-            throw e;
-        }
-    }
-
 }
