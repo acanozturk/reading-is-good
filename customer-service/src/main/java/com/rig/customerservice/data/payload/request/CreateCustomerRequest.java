@@ -15,10 +15,12 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
 
 @Getter
+@Setter
 @GroupSequence({ValidationGroupSequence.class, CreateCustomerRequest.class})
 public final class CreateCustomerRequest {
 

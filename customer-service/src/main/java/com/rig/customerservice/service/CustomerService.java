@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface CustomerService {
     
-    List<GetOrderResponse> getOrdersOfCustomer(int customerId, Pageable pageable);
+    List<GetOrderResponse> getOrdersOfCustomer(long customerId, Pageable pageable);
     
     void createCustomer(CreateCustomerRequest createCustomerRequest);
     

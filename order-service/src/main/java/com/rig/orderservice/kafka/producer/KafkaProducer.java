@@ -20,7 +20,7 @@ public class KafkaProducer {
 
     private final KafkaTemplate<String, String> kafkaTemplate;
 
-    public void produce(final Order order) {
+    public void produceOrderEvent(final Order order) {
         final OrderHistoryEvent orderHistoryEvent = new OrderHistoryEvent().from(order);
         final String eventJson = new Gson().toJson(orderHistoryEvent);
 
@@ -33,7 +33,7 @@ public class KafkaProducer {
         log.info("Order history event produced: {}", eventJson);
     }
 
-    public void produce(final Book book) {
+    public void produceBookEvent(final Book book) {
         final BookHistoryEvent bookHistoryEvent = new BookHistoryEvent().from(book);
         final String eventJson = new Gson().toJson(bookHistoryEvent);
 

@@ -14,12 +14,5 @@ spring:
     password: admin
   jpa:
     open-in-view: false
-    properties:
-      org:
-        hibernate:
-          envers:
-            audit_table_suffix: _HISTORY
-    hibernate:
-      ddl-auto: update
   kafka:
     bootstrap-servers: localhost:9092

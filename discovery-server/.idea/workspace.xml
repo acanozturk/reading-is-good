@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="1398de96-b289-486d-bad2-7bd7686cfb3d" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../api-gateway/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/../api-gateway/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api-gateway/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../api-gateway/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api-gateway/src/main/java/com/rig/apigateway/exception/handler/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/../api-gateway/src/main/java/com/rig/apigateway/exception/handler/GlobalExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../authentication-service/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/../authentication-service/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../authentication-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../authentication-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../authentication-service/src/main/java/com/rig/authenticationservice/config/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../authentication-service/src/main/java/com/rig/authenticationservice/config/WebSecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../authentication-service/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../authentication-service/src/main/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../authentication-service/src/test/java/com/rig/authenticationservice/security/jwt/JwtManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../authentication-service/src/test/java/com/rig/authenticationservice/security/jwt/JwtManagerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../book-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../book-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../book-service/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../book-service/src/main/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../book-service/src/test/java/com/rig/bookservice/BookServiceApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../customer-service/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/../customer-service/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../customer-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../customer-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../customer-service/src/main/java/com/rig/customerservice/controller/CustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../customer-service/src/main/java/com/rig/customerservice/controller/CustomerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../customer-service/src/main/java/com/rig/customerservice/data/payload/request/CreateCustomerRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../customer-service/src/main/java/com/rig/customerservice/data/payload/request/CreateCustomerRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../customer-service/src/main/java/com/rig/customerservice/service/CustomerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../customer-service/src/main/java/com/rig/customerservice/service/CustomerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../customer-service/src/main/java/com/rig/customerservice/service/CustomerServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../customer-service/src/main/java/com/rig/customerservice/service/CustomerServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../customer-service/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../customer-service/src/main/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../customer-service/src/test/java/com/rig/customerservice/CustomerServiceApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../db/init.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../db/init.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../docker-compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../docker-compose.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../history-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../history-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../history-service/src/test/java/com/rig/historyservice/HistoryServiceApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../order-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/java/com/rig/orderservice/kafka/event/BookEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/../order-service/src/main/java/com/rig/orderservice/kafka/event/BookEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/java/com/rig/orderservice/kafka/event/OrderHistoryEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/../order-service/src/main/java/com/rig/orderservice/kafka/event/OrderHistoryEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/java/com/rig/orderservice/kafka/producer/KafkaProducer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../order-service/src/main/java/com/rig/orderservice/kafka/producer/KafkaProducer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/java/com/rig/orderservice/service/OrderServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../order-service/src/main/java/com/rig/orderservice/service/OrderServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/test/java/com/rig/orderservice/OrderServiceApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../statistics-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../statistics-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../statistics-service/src/main/java/com/rig/statisticsservice/data/payload/CustomerOrderStatisticsPerMonth.java" beforeDir="false" afterPath="$PROJECT_DIR$/../statistics-service/src/main/java/com/rig/statisticsservice/data/payload/CustomerOrderStatisticsPerMonth.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../statistics-service/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../statistics-service/src/main/resources/application-docker.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../statistics-service/src/test/java/com/rig/statisticsservice/StatisticsServiceApplicationTests.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 8
+}]]></component>
+  <component name="ProjectId" id="2bmQCtLCAVQgYBzcpuBjAl9aIZm" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showScratchesAndConsoles" value="false" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1398de96-b289-486d-bad2-7bd7686cfb3d" name="Changes" comment="" />
+      <created>1706817650104</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1706817650104</updated>
+      <workItem from="1706817659608" duration="193000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

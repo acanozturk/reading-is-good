@@ -45,7 +45,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<GetOrderResponse> getOrdersOfCustomer(final int customerId, final Pageable pageable) {
+    public List<GetOrderResponse> getOrdersOfCustomer(final long customerId, final Pageable pageable) {
         return orderRepository.findByCustomerId(customerId, pageable)
                 .stream()
                 .map(order -> modelMapper.map(order, GetOrderResponse.class))

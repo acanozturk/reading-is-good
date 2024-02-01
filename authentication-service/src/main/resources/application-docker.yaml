@@ -1,0 +1,19 @@
+app:
+  security:
+    allowedOrigins: http://localhost:8080
+    jwt:
+      expiration-ms: 3600000
+      secret: B%{9Uyy1FnvfE2#1|U?lD31\wwb2^g2(Iuc2S{km~9\7R;.[5J`4@q5r8/{|o%H
+
+server:
+  port: 8085
+  shutdown: graceful
+  
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://host.docker.internal/rig_db
+    username: admin
+    password: admin
+  jpa:
+    open-in-view: false

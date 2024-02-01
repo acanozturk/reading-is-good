@@ -81,3 +81,9 @@ CREATE TABLE orders
     updated_by VARCHAR(255) NOT NULL,
     version INTEGER NOT NULL DEFAULT 0
 );
+
+INSERT INTO account(id, email, phone, password, status, created_by, updated_by)
+VALUES (1, 'test@test.com', '01234567890', '$2a$10$nTiFm7Sv23IpykI3G2IC4u/Xcfe90ql35e7H00ya9ZdH35ZX5vMrS', 'ACTIVE', 'AUTO', 'AUTO');
+
+INSERT INTO customer(id, account_id, gender, first_name, last_name, date_of_birth, created_by, updated_by)
+VALUES (1, 1, 'MALE', 'Firstname', 'Lastname', '1990-01-01', 'AUTO', 'AUTO');

@@ -23,7 +23,6 @@ class JwtManagerTest extends MockedTestWithSecurity {
     @Test
     void testGenerateJwt() {
         final String jwt = jwtManager.generateJwt(authentication);
-        
         assertThat(jwt).isNotNull();
     }
 

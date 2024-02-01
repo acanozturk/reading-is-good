@@ -2,8 +2,10 @@ package com.rig.orderservice.kafka.event;
 
 import com.rig.orderservice.data.entity.Book;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 public final class BookEvent {
 
     private Long bookId;

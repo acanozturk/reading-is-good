@@ -27,7 +27,7 @@ public final class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ExceptionResponse handle(final ClientBadRequestException exception) {
         log.error("{} occurred: ", exception.getClass().getSimpleName());
-        return new ExceptionResponse(HttpStatus.BAD_GATEWAY.getReasonPhrase());
+        return new ExceptionResponse(HttpStatus.BAD_REQUEST.getReasonPhrase());
     }
 
     @ExceptionHandler(ClientUnauthorizedException.class)

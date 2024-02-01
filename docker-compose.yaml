@@ -14,25 +14,31 @@ services:
     volumes:
       - postgres-data:/var/lib/postgresql/data
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "sh -c 'pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}'"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 20s
     restart: always
 
   mongo:
-      image: mongo
-      container_name: rig-mongo
-      ports:
-        - '27017:27017'
-      volumes:
-        - mongo-data:/data/db
-      environment:
-        MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
-        MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_USERNAME}
-      healthcheck:
-        test: echo 'db.runCommand({serverStatus:1}).ok' | mongosh admin -u $MONGO_INITDB_ROOT_USERNAME -p $MONGO_INITDB_ROOT_PASSWORD --quiet | grep 1
-        interval: 10s
-        timeout: 10s
-        retries: 3
-        start_period: 20s
-      restart: on-failure
+    image: mongo
+    container_name: rig-mongo
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongo-data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_USERNAME}
+    healthcheck:
+      test: echo 'db.runCommand({serverStatus:1}).ok' | mongosh admin -u $MONGO_INITDB_ROOT_USERNAME -p $MONGO_INITDB_ROOT_PASSWORD --quiet | grep 1
+      interval: 10s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+    restart: on-failure
       
   zookeeper:
     image: bitnami/zookeeper
@@ -55,7 +61,7 @@ services:
       ALLOW_PLAINTEXT_LISTENER: yes
       KAFKA_CFG_BROKER_ID: 1
       KAFKA_CFG_LISTENERS: PLAINTEXT://:9092
-      KAFKA_CFG_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_CFG_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
       KAFKA_CFG_ZOOKEEPER_CONNECT: zookeeper:2181
     depends_on:
       zookeeper:
@@ -70,8 +76,129 @@ services:
       retries: 5
     restart: on-failure
     
+  api-gateway:
+    build:
+      context: api-gateway/./
+    ports:
+      - '8080:8080'
+    environment:
+      - "SPRING_PROFILES_ACTIVE=docker"
+    restart: on-failure
+
+  authentication-service:
+    build:
+      context: authentication-service/./
+    environment:
+      - "SPRING_PROFILES_ACTIVE=docker"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: on-failure 
+
+  book-service:
+    build:
+      context: book-service/./
+    environment:
+      - "SPRING_PROFILES_ACTIVE=docker"
+    depends_on: 
+      postgres:
+        condition: service_healthy
+      kafka:
+        condition: service_started
+    restart: on-failure
+  
+  customer-service:
+    build:
+      context: customer-service/./
+    environment:
+      - "SPRING_PROFILES_ACTIVE=docker"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      kafka:
+        condition: service_started
+    restart: on-failure
+
+  order-service:
+    build:
+      context: order-service/./
+    environment:
+      - "SPRING_PROFILES_ACTIVE=docker"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      kafka:
+        condition: service_started
+    restart: on-failure
+
+  statistics-service:
+    build:
+      context: statistics-service/./
+    environment:
+      - "SPRING_PROFILES_ACTIVE=docker"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: on-failure
+
+  history-service:
+    build:
+      context: history-service/./
+    environment:
+      - "SPRING_PROFILES_ACTIVE=docker"
+    depends_on:
+      mongo:
+        condition: service_healthy
+      kafka:
+        condition: service_started
+    restart: on-failure
+    
+    # Commented out due to high memory consumptions, used for centralized logging
+#  elasticsearch:
+#    image: elasticsearch:8.12.0
+#    container_name: rig-elasticsearch
+#    ports:
+#      - "9200:9200"
+#      - "9300:9300"
+#    restart: always
+#    environment:
+#      - xpack.security.enabled=false
+#      - discovery.type=single-node
+#      - ES_JAVA_OPTS=-Xms750m -Xmx750m
+#      - es-data:/usr/share/elasticsearch/data
+#
+#  kibana:
+#    image: kibana:8.12.0
+#    container_name: rig-kibana
+#    ports:
+#      - "5601:5601"
+#    depends_on:
+#      - elasticsearch
+#      - logstash
+#    restart: always
+#    environment:
+#      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+#
+#  logstash:
+#    image: logstash:8.12.0
+#    container_name: rig-logstash
+#    ports:
+#      - "5000:5000"
+#      - "5001:5001/tcp"
+#    depends_on:
+#      - elasticsearch
+#    restart: always
+#    volumes:
+#      - ./elk/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+#      - ./elk/rig-logs-index-template.json:/usr/share/logstash/rig-logs-index-template.json
+#    environment:
+#      - XPACK_MONITORING_ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+#      - XPACK_MONITORING_ENABLED=true
+#      - LS_JAVA_OPTS=-Xms500m -Xmx500m
+    
 volumes:
   postgres-data:
   mongo-data:
   zk-data:
   kafka-data:
+#  es-data:

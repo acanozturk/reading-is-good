@@ -2,8 +2,10 @@ package com.rig.orderservice.kafka.event;
 
 import com.rig.orderservice.data.entity.Order;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 public final class OrderHistoryEvent {
 
     private Long orderId;

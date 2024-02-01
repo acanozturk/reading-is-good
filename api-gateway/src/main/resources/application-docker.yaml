@@ -1,0 +1,69 @@
+app:
+  client:
+    authentication-service:
+      name: authentication-service-client
+      url: http://authentication-service:8085
+    book-service:
+      name: book-service-client
+      url: http://book-service:8090
+    customer-service:
+      name: customer-service-client
+      url: http://customer-service:8095
+    order-service:
+      name: order-service-client
+      url: http://order-service:8100
+    statistics-service:
+      name: statistics-service-client
+      url: http://statistics-service:8105
+  security:
+    allowedOrigins: http://localhost
+    api-key:
+      header: x-api-key
+      value: 989fe8e4-1066-44be-9fd4-0b7ecfeecef6
+    jwt:
+      secret: B%{9Uyy1FnvfE2#1|U?lD31\wwb2^g2(Iuc2S{km~9\7R;.[5J`4@q5r8/{|o%H
+
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        slidingWindowType: COUNT_BASED
+        slidingWindowSize: 100
+        permittedNumberOfCallsInHalfOpenState: 10
+        waitDurationInOpenState: 10
+        failureRateThreshold: 50
+        recordExceptions:
+          - org.springframework.web.client.HttpServerErrorException
+    instances:
+      authentication-service-circuit-breaker:
+        baseConfig: default
+      book-service-circuit-breaker:
+        baseConfig: default
+      customer-service-circuit-breaker:
+        baseConfig: default
+      order-service-circuit-breaker:
+        baseConfig: default
+      statistics-service-circuit-breaker:
+        baseConfig: default
+  ratelimiter:
+    configs:
+      default:
+        limitForPeriod: 100
+        limitRefreshPeriod: 1s
+        timeoutDuration: 5s
+    instances:
+      authentication-service-rate-limiter:
+        baseConfig: default
+      book-service-rate-limiter:
+        baseConfig: default
+      customer-service-rate-limiter:
+        baseConfig: default
+      order-service-rate-limiter:
+        baseConfig: default
+      statistics-service-rate-limiter:
+        baseConfig: default 
+
+server:
+  port: 8080
+  shutdown: graceful
+      

@@ -71,8 +71,8 @@ public class OrderServiceImpl implements OrderService {
 
         log.info("New order created with id: {}, order code: {}", order.getId(), order.getOrderCode());
 
-        kafkaProducer.produce(order);
-        kafkaProducer.produce(updatedBook);
+        kafkaProducer.produceOrderEvent(order);
+        kafkaProducer.produceBookEvent(updatedBook);
     }
 
     private Order saveOrder(final CreateOrderRequest createOrderRequest, final Book book) {

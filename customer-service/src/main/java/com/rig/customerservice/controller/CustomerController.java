@@ -19,7 +19,7 @@ public final class CustomerController {
     private final CustomerService customerService;
 
     @GetMapping("/{customerId}/orders")
-    public List<GetOrderResponse> getOrdersOfCustomer(@PathVariable final int customerId, final Pageable pageable) {
+    public List<GetOrderResponse> getOrdersOfCustomer(@PathVariable final long customerId, final Pageable pageable) {
         return customerService.getOrdersOfCustomer(customerId, pageable);
     }
 
